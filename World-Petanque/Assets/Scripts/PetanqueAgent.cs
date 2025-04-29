@@ -12,9 +12,10 @@ public class PetanqueAgent : Agent
     public override void OnEpisodeBegin()
     {
         // Reset de bal naar beginpositie
+        ballRb.transform.position = ballStartPos.position;
         ballRb.linearVelocity = Vector3.zero;
         ballRb.angularVelocity = Vector3.zero;
-        ballRb.transform.position = ballStartPos.position;
+
     }
 
     public override void CollectObservations(VectorSensor sensor)
