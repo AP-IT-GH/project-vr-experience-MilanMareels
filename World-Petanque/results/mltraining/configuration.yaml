@@ -1,21 +1,21 @@
 default_settings: null
 behaviors:
-  ObstacleAvoidance:
+  PetanqueThrower:
     trainer_type: ppo
     hyperparameters:
-      batch_size: 64
-      buffer_size: 1024
+      batch_size: 128
+      buffer_size: 2048
       learning_rate: 0.0003
-      beta: 0.0005
+      beta: 0.005
       epsilon: 0.2
-      lambd: 0.99
+      lambd: 0.95
       num_epoch: 3
       shared_critic: false
       learning_rate_schedule: linear
-      beta_schedule: constant
+      beta_schedule: linear
       epsilon_schedule: linear
     network_settings:
-      normalize: true
+      normalize: false
       hidden_units: 128
       num_layers: 2
       vis_encode_type: simple
@@ -37,10 +37,10 @@ behaviors:
     init_path: null
     keep_checkpoints: 5
     checkpoint_interval: 500000
-    max_steps: 500000
+    max_steps: 1000000
     time_horizon: 64
     summary_freq: 2000
-    threaded: false
+    threaded: true
     self_play: null
     behavioral_cloning: null
 env_settings:

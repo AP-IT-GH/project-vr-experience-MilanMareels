@@ -5,56 +5,112 @@ using Unity.MLAgents.Actuators;
 
 public class PetanqueAgent : Agent
 {
+    [Header("References")]
     public Rigidbody ballRb;
     public Transform target;
     public Transform ballStartPos;
 
+    [Header("Settings")]
+    public float groundLevel = 0f;
+    public float maxThrowPower = 15f;
+    public float maxDistance = 10f;
+
+    private bool hasThrown = false;
+    private Vector3 initialTargetPosition;
+
+    public override void Initialize()
+    {
+        initialTargetPosition = target.position;
+        ballRb.maxAngularVelocity = 20f;
+    }
+
     public override void OnEpisodeBegin()
     {
-        // Reset de bal naar beginpositie
+        // Reset ball
         ballRb.transform.position = ballStartPos.position;
         ballRb.linearVelocity = Vector3.zero;
         ballRb.angularVelocity = Vector3.zero;
 
+        // Randomize target position within a smaller range
+        target.position = initialTargetPosition + new Vector3(
+            Random.Range(-1.5f, 1.5f),
+            0f,
+            Random.Range(-1.5f, 1.5f)
+        );
+
+        hasThrown = false;
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        // Positieverschil tussen bal en target
-        sensor.AddObservation(target.position - ballRb.position);
-        // Snelheid van de bal
+        // Relative position to target (3)
+        Vector3 toTarget = target.position - ballRb.position;
+        sensor.AddObservation(toTarget);
+
+        // Ball velocity (3)
         sensor.AddObservation(ballRb.linearVelocity);
+
+        // Ball and target positions (6)
+        sensor.AddObservation(ballRb.position);
+        sensor.AddObservation(target.position);
+
+        // Total: 3 + 3 + 3 + 3 = 12 observations
     }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        // Alleen bij eerste actie gooien
-        if (ballRb.linearVelocity.magnitude < 0.01f)
+        if (!hasThrown)
         {
-            float x = actions.ContinuousActions[0];
-            float z = actions.ContinuousActions[1];
-            float power = actions.ContinuousActions[2];
+            float x = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f);
+            float z = Mathf.Clamp(actions.ContinuousActions[1], -1f, 1f);
+            float power = Mathf.Clamp(actions.ContinuousActions[2], 0.1f, 1f) * maxThrowPower;
+            float angle = Mathf.Clamp(actions.ContinuousActions[3], 0.1f, 0.6f);
 
-            Vector3 direction = new Vector3(x, 0.5f, z).normalized;
-            ballRb.AddForce(direction * power * 10f, ForceMode.Impulse);
+            Vector3 direction = new Vector3(x, angle, z).normalized;
+            ballRb.AddForce(direction * power, ForceMode.VelocityChange);
+
+            hasThrown = true;
         }
 
-        float distance = Vector3.Distance(ballRb.position, target.position);
-        float reward = Mathf.Clamp(1.0f - distance / 10f, 0, 1);
-        AddReward(reward);
-
-        // Be�indig episode als de bal stil ligt
-        if (ballRb.linearVelocity.magnitude < 0.01f && ballRb.position != ballStartPos.position)
+        // Terminate if the ball falls below ground
+        if (ballRb.position.y < groundLevel - 0.5f)
         {
+            AddReward(-0.5f);
+            EndEpisode();
+            return;
+        }
+
+        // Give ongoing reward while ball is moving (closer = better)
+        if (hasThrown && ballRb.linearVelocity.magnitude > 0.05f)
+        {
+            float dist = Vector3.Distance(ballRb.position, target.position);
+            float reward = Mathf.Clamp01(1f - (dist / maxDistance));
+            AddReward(reward * 0.001f); // small shaping reward
+        }
+
+        // End episode when ball stops
+        if (hasThrown && ballRb.linearVelocity.magnitude <= 0.05f)
+        {
+            float dist = Vector3.Distance(ballRb.position, target.position);
+            float finalReward = Mathf.Clamp01(1f - (dist / maxDistance));
+
+            if (dist < 0.3f)
+                finalReward += 1f; // bonus for very close
+
+            AddReward(finalReward);
             EndEpisode();
         }
+
+        // Optional: lighter time penalty
+        AddReward(-0.0005f);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        var continuousActionsOut = actionsOut.ContinuousActions;
-        continuousActionsOut[0] = Random.Range(-1f, 1f);
-        continuousActionsOut[1] = Random.Range(-1f, 1f);
-        continuousActionsOut[2] = Random.Range(0.5f, 1.0f);
+        var actions = actionsOut.ContinuousActions;
+        actions[0] = Input.GetAxis("Horizontal");
+        actions[1] = Input.GetAxis("Vertical");
+        actions[2] = Input.GetKey(KeyCode.Space) ? 1f : 0.7f;
+        actions[3] = 0.4f;
     }
 }
