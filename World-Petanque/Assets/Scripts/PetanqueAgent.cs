@@ -12,7 +12,7 @@ public class PetanqueAgent : Agent
 
     [Header("Settings")]
     public float groundLevel = 0f;
-    public float maxThrowPower = 15f;
+    public float maxThrowPower = 30f;
     public float maxDistance = 10f;
 
     private bool hasThrown = false;

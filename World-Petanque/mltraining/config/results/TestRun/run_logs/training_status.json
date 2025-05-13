@@ -9,15 +9,24 @@
                 "auxillary_file_paths": [
                     "results\\TestRun\\PetanqueThrower\\PetanqueThrower-151062.pt"
                 ]
+            },
+            {
+                "steps": 183181,
+                "file_path": "results\\TestRun\\PetanqueThrower\\PetanqueThrower-183181.onnx",
+                "reward": 3.7105439782142637,
+                "creation_time": 1747142008.1738508,
+                "auxillary_file_paths": [
+                    "results\\TestRun\\PetanqueThrower\\PetanqueThrower-183181.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 151062,
+            "steps": 183181,
             "file_path": "results\\TestRun\\PetanqueThrower.onnx",
-            "reward": 3.4693599562895927,
-            "creation_time": 1747140523.344043,
+            "reward": 3.7105439782142637,
+            "creation_time": 1747142008.1738508,
             "auxillary_file_paths": [
-                "results\\TestRun\\PetanqueThrower\\PetanqueThrower-151062.pt"
+                "results\\TestRun\\PetanqueThrower\\PetanqueThrower-183181.pt"
             ]
         }
     },
