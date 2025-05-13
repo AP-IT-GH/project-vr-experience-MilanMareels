@@ -26,91 +26,90 @@ public class PetanqueAgent : Agent
 
     public override void OnEpisodeBegin()
     {
-        // Reset ball
+        // Reset bal
         ballRb.transform.position = ballStartPos.position;
         ballRb.linearVelocity = Vector3.zero;
         ballRb.angularVelocity = Vector3.zero;
 
-        // Randomize target position within a smaller range
-        target.position = initialTargetPosition + new Vector3(
-            Random.Range(-1.5f, 1.5f),
-            0f,
-            Random.Range(-1.5f, 1.5f)
-        );
+        // Reset target (optioneel randomiseren)
+        // target.position = initialTargetPosition + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f));
 
         hasThrown = false;
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        // Relative position to target (3)
-        Vector3 toTarget = target.position - ballRb.position;
-        sensor.AddObservation(toTarget);
+        // 1. Relatieve positie tot target (3)
+        sensor.AddObservation(target.position - ballRb.position);
 
-        // Ball velocity (3)
+        // 2. Snelheid van de bal (3)
         sensor.AddObservation(ballRb.linearVelocity);
 
-        // Ball and target positions (6)
+        // 3. Positie van de bal (3)
         sensor.AddObservation(ballRb.position);
-        sensor.AddObservation(target.position);
-
-        // Total: 3 + 3 + 3 + 3 = 12 observations
     }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
         if (!hasThrown)
         {
-            float x = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f);
-            float z = Mathf.Clamp(actions.ContinuousActions[1], -1f, 1f);
-            float power = Mathf.Clamp(actions.ContinuousActions[2], 0.1f, 1f) * maxThrowPower;
-            float angle = Mathf.Clamp(actions.ContinuousActions[3], 0.1f, 0.6f);
+            // Acties: richting x,y,z en power
+            float dirX = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f);
+            float dirY = Mathf.Clamp(actions.ContinuousActions[1], 0.1f, 1f);
+            float dirZ = Mathf.Clamp(actions.ContinuousActions[2], -1f, 1f);
+            float power = Mathf.Clamp(actions.ContinuousActions[3], 0.1f, 1f) * maxThrowPower;
 
-            Vector3 direction = new Vector3(x, angle, z).normalized;
+            Vector3 direction = new Vector3(dirX, dirY, dirZ).normalized;
             ballRb.AddForce(direction * power, ForceMode.VelocityChange);
 
             hasThrown = true;
         }
 
-        // Terminate if the ball falls below ground
+        // Straf als de bal valt
         if (ballRb.position.y < groundLevel - 0.5f)
         {
-            AddReward(-0.5f);
+            AddReward(-1f);
             EndEpisode();
             return;
         }
 
-        // Give ongoing reward while ball is moving (closer = better)
+        // Shaping reward tijdens beweging
         if (hasThrown && ballRb.linearVelocity.magnitude > 0.05f)
         {
             float dist = Vector3.Distance(ballRb.position, target.position);
             float reward = Mathf.Clamp01(1f - (dist / maxDistance));
-            AddReward(reward * 0.001f); // small shaping reward
+            AddReward(reward * 0.01f);
         }
 
-        // End episode when ball stops
+        // Einde als bal stilstaat
         if (hasThrown && ballRb.linearVelocity.magnitude <= 0.05f)
         {
             float dist = Vector3.Distance(ballRb.position, target.position);
-            float finalReward = Mathf.Clamp01(1f - (dist / maxDistance));
+            float normalizedDist = Mathf.Clamp01(dist / maxDistance);
+            float finalReward = 1f - normalizedDist;
 
+            // Straf bij grote mis
+            if (dist > maxDistance * 0.9f)
+                finalReward -= 0.5f;
+
+            // Bonus bij zeer dichtbij
             if (dist < 0.3f)
-                finalReward += 1f; // bonus for very close
+                finalReward += 1f;
 
             AddReward(finalReward);
             EndEpisode();
         }
 
-        // Optional: lighter time penalty
+        // Lichte tijdstraf per stap
         AddReward(-0.0005f);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         var actions = actionsOut.ContinuousActions;
-        actions[0] = Input.GetAxis("Horizontal");
-        actions[1] = Input.GetAxis("Vertical");
-        actions[2] = Input.GetKey(KeyCode.Space) ? 1f : 0.7f;
-        actions[3] = 0.4f;
+        actions[0] = Input.GetAxis("Horizontal"); // x richting
+        actions[1] = 0.5f;                        // y richting
+        actions[2] = Input.GetAxis("Vertical");   // z richting
+        actions[3] = Input.GetKey(KeyCode.Space) ? 1f : 0.7f; // kracht
     }
 }
