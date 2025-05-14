@@ -459,7 +459,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1, z: 1}
+  m_LocalScale: {x: 3.18465, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -514,8 +514,8 @@ Rigidbody:
   m_GameObject: {fileID: 480286455}
   serializedVersion: 4
   m_Mass: 2
-  m_Drag: 0.2
-  m_AngularDrag: 0.05
+  m_Drag: 0.4
+  m_AngularDrag: 0.15
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -614,13 +614,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 480286455}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: 0.9573376, z: -0, w: 0.28897196}
   m_LocalPosition: {x: 0, y: 0.3, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 146.407, z: 0}
 --- !u!1 &734622729
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,13 +645,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 734622729}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7187518, z: -0, w: -0.6952668}
   m_LocalPosition: {x: -3.07, y: 0.8, z: -0.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 268.097, z: 0}
 --- !u!1 &997471763
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +693,7 @@ MonoBehaviour:
   target: {fileID: 1862905494}
   ballStartPos: {fileID: 734622730}
   groundLevel: 0
-  maxThrowPower: 15
+  maxThrowPower: 30
   maxDistance: 20
 --- !u!65 &997471765
 BoxCollider:
@@ -765,7 +765,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 6433abb0365fbe04aad4e6f697408f5e, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: PetanqueThrower
@@ -782,13 +782,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997471763}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.6940996, z: -0, w: 0.719879}
+  m_LocalRotation: {x: -0, y: 0.71875197, z: -0, w: -0.6952666}
   m_LocalPosition: {x: -3.07, y: 0.8, z: -0.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 87.911, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 268.097, z: 0}
 --- !u!114 &997471769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -832,7 +832,7 @@ Transform:
   m_GameObject: {fileID: 1862905493}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0.1, z: 0}
+  m_LocalPosition: {x: 4.98, y: 0.1, z: -0.06}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []

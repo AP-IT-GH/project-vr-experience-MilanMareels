@@ -1,0 +1,29 @@
+{
+    "PetanqueThrower": {
+        "checkpoints": [
+            {
+                "steps": 169681,
+                "file_path": "results\\Ball-v2\\PetanqueThrower\\PetanqueThrower-169681.onnx",
+                "reward": 1.8010827950809314,
+                "creation_time": 1747145469.0801067,
+                "auxillary_file_paths": [
+                    "results\\Ball-v2\\PetanqueThrower\\PetanqueThrower-169681.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 169681,
+            "file_path": "results\\Ball-v2\\PetanqueThrower.onnx",
+            "reward": 1.8010827950809314,
+            "creation_time": 1747145469.0801067,
+            "auxillary_file_paths": [
+                "results\\Ball-v2\\PetanqueThrower\\PetanqueThrower-169681.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.4.1+cpu"
+    }
+}
