@@ -690,7 +690,7 @@ PrefabInstance:
     - target: {fileID: 3920105407843247029, guid: 8687ab3c68afbc041951aa2bb50b5ff8, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5022602860645237092, guid: e71a718ed9b523649943914d776e884e, type: 3}
     - target: {fileID: 3920105407843247029, guid: 8687ab3c68afbc041951aa2bb50b5ff8, type: 3}
       propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
       value: 5
