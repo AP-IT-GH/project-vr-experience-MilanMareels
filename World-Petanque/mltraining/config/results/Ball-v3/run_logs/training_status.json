@@ -1,0 +1,38 @@
+{
+    "PetanqueThrower": {
+        "checkpoints": [
+            {
+                "steps": 499972,
+                "file_path": "results\\Ball-v3\\PetanqueThrower\\PetanqueThrower-499972.onnx",
+                "reward": 1.4957572275942022,
+                "creation_time": 1747153790.730945,
+                "auxillary_file_paths": [
+                    "results\\Ball-v3\\PetanqueThrower\\PetanqueThrower-499972.pt"
+                ]
+            },
+            {
+                "steps": 958285,
+                "file_path": "results\\Ball-v3\\PetanqueThrower\\PetanqueThrower-958285.onnx",
+                "reward": 2.06490321486604,
+                "creation_time": 1747157024.260471,
+                "auxillary_file_paths": [
+                    "results\\Ball-v3\\PetanqueThrower\\PetanqueThrower-958285.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 958285,
+            "file_path": "results\\Ball-v3\\PetanqueThrower.onnx",
+            "reward": 2.06490321486604,
+            "creation_time": 1747157024.260471,
+            "auxillary_file_paths": [
+                "results\\Ball-v3\\PetanqueThrower\\PetanqueThrower-958285.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.4.1+cpu"
+    }
+}
