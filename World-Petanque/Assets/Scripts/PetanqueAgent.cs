@@ -32,7 +32,7 @@ public class PetanqueAgent : Agent
         ballRb.angularVelocity = Vector3.zero;
 
         // Reset target naar willekeurige plek binnen bereik
-        target.position = initialTargetPosition + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f));
+        //target.position = initialTargetPosition + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f));
 
         hasThrown = false;
     }
