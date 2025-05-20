@@ -31,15 +31,15 @@ public class PetanqueAgent : Agent
         ballRb.linearVelocity = Vector3.zero;
         ballRb.angularVelocity = Vector3.zero;
 
-        // Reset target (optioneel randomiseren)
-        // target.position = initialTargetPosition + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f));
+        // Reset target naar willekeurige plek binnen bereik
+        target.position = initialTargetPosition + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f));
 
         hasThrown = false;
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        // 1. Relatieve positie tot target (3)
+        // 1. Relatieve positie target (3)
         sensor.AddObservation(target.position - ballRb.position);
 
         // 2. Snelheid van de bal (3)
@@ -53,19 +53,27 @@ public class PetanqueAgent : Agent
     {
         if (!hasThrown)
         {
-            // Acties: richting x,y,z en power
-            float dirX = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f);
-            float dirY = Mathf.Clamp(actions.ContinuousActions[1], 0.1f, 1f);
-            float dirZ = Mathf.Clamp(actions.ContinuousActions[2], -1f, 1f);
-            float power = Mathf.Clamp(actions.ContinuousActions[3], 0.1f, 1f) * maxThrowPower;
+            float throwCommand = Mathf.Clamp01(actions.ContinuousActions[4]);
 
-            Vector3 direction = new Vector3(dirX, dirY, dirZ).normalized;
-            ballRb.AddForce(direction * power, ForceMode.VelocityChange);
+            if (throwCommand > 0.5f)
+            {
+                float dirX = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f);
+                float dirY = Mathf.Clamp(actions.ContinuousActions[1], 0.1f, 1f);
+                float dirZ = Mathf.Clamp(actions.ContinuousActions[2], -1f, 1f);
+                float power = Mathf.Clamp(actions.ContinuousActions[3], 0.1f, 1f) * maxThrowPower;
 
-            hasThrown = true;
+                Vector3 direction = new Vector3(dirX, dirY, dirZ).normalized;
+                ballRb.AddForce(direction * power, ForceMode.VelocityChange);
+
+                hasThrown = true;
+            }
+
+            // Straf als de agent blijft treuzelen
+            AddReward(-0.001f);
+            return;
         }
 
-        // Straf als de bal valt
+        // Straf als de bal uit de wereld valt
         if (ballRb.position.y < groundLevel - 0.5f)
         {
             AddReward(-1f);
@@ -73,28 +81,21 @@ public class PetanqueAgent : Agent
             return;
         }
 
-        // Shaping reward tijdens beweging
-        if (hasThrown && ballRb.linearVelocity.magnitude > 0.05f)
+        // Shaping reward zolang bal beweegt
+        if (ballRb.linearVelocity.magnitude > 0.05f)
         {
             float dist = Vector3.Distance(ballRb.position, target.position);
             float reward = Mathf.Clamp01(1f - (dist / maxDistance));
             AddReward(reward * 0.01f);
         }
 
-        // Einde als bal stilstaat
-        if (hasThrown && ballRb.linearVelocity.magnitude <= 0.05f)
+        // Episode eindigt zodra de bal stilstaat
+        if (ballRb.linearVelocity.magnitude <= 0.05f)
         {
             float dist = Vector3.Distance(ballRb.position, target.position);
             float normalizedDist = Mathf.Clamp01(dist / maxDistance);
-            float finalReward = 1f - normalizedDist;
 
-            // Straf bij grote mis
-            if (dist > maxDistance * 0.9f)
-                finalReward -= 0.5f;
-
-            // Bonus bij zeer dichtbij
-            if (dist < 0.3f)
-                finalReward += 1f;
+            float finalReward = Mathf.Lerp(1f, -1f, normalizedDist); // Van +1 tot -1
 
             AddReward(finalReward);
             EndEpisode();
@@ -107,9 +108,10 @@ public class PetanqueAgent : Agent
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         var actions = actionsOut.ContinuousActions;
-        actions[0] = Input.GetAxis("Horizontal"); // x richting
-        actions[1] = 0.5f;                        // y richting
-        actions[2] = Input.GetAxis("Vertical");   // z richting
-        actions[3] = Input.GetKey(KeyCode.Space) ? 1f : 0.7f; // kracht
+        actions[0] = Input.GetAxis("Horizontal");         // x-richting
+        actions[1] = 0.5f;                                // y-richting vast (lichte boog)
+        actions[2] = Input.GetAxis("Vertical");           // z-richting
+        actions[3] = Input.GetKey(KeyCode.LeftShift) ? 1f : 0.6f; // kracht
+        actions[4] = Input.GetKey(KeyCode.Space) ? 1f : 0f;       // gooi commando
     }
 }
