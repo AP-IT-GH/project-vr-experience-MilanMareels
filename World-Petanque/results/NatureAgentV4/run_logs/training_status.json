@@ -1,0 +1,47 @@
+{
+    "PetanqueThrower": {
+        "checkpoints": [
+            {
+                "steps": 419333,
+                "file_path": "results\\NatureAgentV4\\PetanqueThrower\\PetanqueThrower-419333.onnx",
+                "reward": 1.4688962896664937,
+                "creation_time": 1747818874.8322015,
+                "auxillary_file_paths": [
+                    "results\\NatureAgentV4\\PetanqueThrower\\PetanqueThrower-419333.pt"
+                ]
+            },
+            {
+                "steps": 499976,
+                "file_path": "results\\NatureAgentV4\\PetanqueThrower\\PetanqueThrower-499976.onnx",
+                "reward": 0.8288417845441584,
+                "creation_time": 1747820009.1112807,
+                "auxillary_file_paths": [
+                    "results\\NatureAgentV4\\PetanqueThrower\\PetanqueThrower-499976.pt"
+                ]
+            },
+            {
+                "steps": 898185,
+                "file_path": "results\\NatureAgentV4\\PetanqueThrower\\PetanqueThrower-898185.onnx",
+                "reward": 0.7797958496958017,
+                "creation_time": 1747824143.7943642,
+                "auxillary_file_paths": [
+                    "results\\NatureAgentV4\\PetanqueThrower\\PetanqueThrower-898185.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 898185,
+            "file_path": "results\\NatureAgentV4\\PetanqueThrower.onnx",
+            "reward": 0.7797958496958017,
+            "creation_time": 1747824143.7943642,
+            "auxillary_file_paths": [
+                "results\\NatureAgentV4\\PetanqueThrower\\PetanqueThrower-898185.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
