@@ -6070,7 +6070,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e20b484484a966b4d8b5d27689b2cf43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 1314906921}
+  playerBall: {fileID: 1314906921}
+  agentBall: {fileID: 1607936495}
   resetTime: 5
 --- !u!65 &637534615
 BoxCollider:
@@ -8497,7 +8498,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e20b484484a966b4d8b5d27689b2cf43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 1314906921}
+  playerBall: {fileID: 1314906921}
+  agentBall: {fileID: 1607936495}
   resetTime: 2
 --- !u!65 &939846377
 BoxCollider:
@@ -10467,7 +10469,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e20b484484a966b4d8b5d27689b2cf43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 1314906921}
+  playerBall: {fileID: 1314906921}
+  agentBall: {fileID: 1607936495}
   resetTime: 2
 --- !u!65 &1159429786
 BoxCollider:
@@ -15004,6 +15007,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1793227233948744242, guid: 422b0cab86b487749aaebedc0e2fd602, type: 3}
   m_PrefabInstance: {fileID: 485033766}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1607936495 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8165391200078292291, guid: c23a459f31f47ef4ea2e5b1bbab5fbec, type: 3}
+  m_PrefabInstance: {fileID: 328171928}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1608343688
 PrefabInstance:
