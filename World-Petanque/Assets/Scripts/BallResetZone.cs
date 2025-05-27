@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class BallResetZone : MonoBehaviour
 {
-    public GameObject ball; // Assign this in the Inspector
+    public GameObject ball;
+
+    public int resetTime;
 
     private Vector3 originalPosition;
     private Quaternion originalRotation;
@@ -45,7 +47,7 @@ public class BallResetZone : MonoBehaviour
 
     IEnumerator WaitAndReset()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(resetTime);
 
         // Reset position, rotation and velocity
         ball.transform.position = originalPosition;
