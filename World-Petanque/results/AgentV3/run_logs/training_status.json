@@ -1,0 +1,47 @@
+{
+    "PetanqueThrower": {
+        "checkpoints": [
+            {
+                "steps": 56623,
+                "file_path": "results\\AgentV3\\PetanqueThrower\\PetanqueThrower-56623.onnx",
+                "reward": 0.7558186070124309,
+                "creation_time": 1747752260.118517,
+                "auxillary_file_paths": [
+                    "results\\AgentV3\\PetanqueThrower\\PetanqueThrower-56623.pt"
+                ]
+            },
+            {
+                "steps": 499996,
+                "file_path": "results\\AgentV3\\PetanqueThrower\\PetanqueThrower-499996.onnx",
+                "reward": 0.9606456017494202,
+                "creation_time": 1747764442.9986434,
+                "auxillary_file_paths": [
+                    "results\\AgentV3\\PetanqueThrower\\PetanqueThrower-499996.pt"
+                ]
+            },
+            {
+                "steps": 513616,
+                "file_path": "results\\AgentV3\\PetanqueThrower\\PetanqueThrower-513616.onnx",
+                "reward": 0.959319087496975,
+                "creation_time": 1747764537.5577264,
+                "auxillary_file_paths": [
+                    "results\\AgentV3\\PetanqueThrower\\PetanqueThrower-513616.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 513616,
+            "file_path": "results\\AgentV3\\PetanqueThrower.onnx",
+            "reward": 0.959319087496975,
+            "creation_time": 1747764537.5577264,
+            "auxillary_file_paths": [
+                "results\\AgentV3\\PetanqueThrower\\PetanqueThrower-513616.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
