@@ -53,7 +53,6 @@ public class PetanqueAgent : Agent
     {
         if (!hasThrown)
         {
-            // Acties: richting x,y,z en power
             float dirX = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f);
             float dirY = Mathf.Clamp(actions.ContinuousActions[1], 0.1f, 1f);
             float dirZ = Mathf.Clamp(actions.ContinuousActions[2], -1f, 1f);
@@ -65,7 +64,7 @@ public class PetanqueAgent : Agent
             hasThrown = true;
         }
 
-        // Straf als de bal valt
+        // End episode als bal van terrein valt
         if (ballRb.position.y < groundLevel - 0.5f)
         {
             AddReward(-1f);
@@ -73,36 +72,40 @@ public class PetanqueAgent : Agent
             return;
         }
 
-        // Shaping reward tijdens beweging
-        if (hasThrown && ballRb.linearVelocity.magnitude > 0.05f)
-        {
-            float dist = Vector3.Distance(ballRb.position, target.position);
-            float reward = Mathf.Clamp01(1f - (dist / maxDistance));
-            AddReward(reward * 0.01f);
-        }
-
-        // Einde als bal stilstaat
+        // Controleer of bal stilstaat
         if (hasThrown && ballRb.linearVelocity.magnitude <= 0.05f)
         {
             float dist = Vector3.Distance(ballRb.position, target.position);
             float normalizedDist = Mathf.Clamp01(dist / maxDistance);
-            float finalReward = 1f - normalizedDist;
 
-            // Straf bij grote mis
-            if (dist > maxDistance * 0.9f)
-                finalReward -= 0.5f;
+            float reward = 1f - normalizedDist; // 1 als perfect, 0 als slecht
 
-            // Bonus bij zeer dichtbij
-            if (dist < 0.3f)
-                finalReward += 1f;
+            if (dist < 0.2f)
+            {
+                reward += 1f; // grote bonus als zeer dichtbij
+            }
+            else if (dist > maxDistance * 0.9f)
+            {
+                reward -= 0.5f; // straf bij grote mis
+            }
 
-            AddReward(finalReward);
+            AddReward(reward);
             EndEpisode();
+            return;
         }
 
-        // Lichte tijdstraf per stap
-        AddReward(-0.0005f);
+        // Tussentijdse shaping reward als bal beweegt
+        if (hasThrown)
+        {
+            float dist = Vector3.Distance(ballRb.position, target.position);
+            float shapedReward = Mathf.Clamp01(1f - (dist / maxDistance));
+            AddReward(shapedReward * 0.005f); // versterkt shaping
+        }
+
+        // Straf voor tijd
+        AddReward(-0.001f); // licht verhoogde straf per stap
     }
+
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
