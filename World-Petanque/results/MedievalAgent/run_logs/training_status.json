@@ -1,0 +1,65 @@
+{
+    "PetanqueThrower": {
+        "checkpoints": [
+            {
+                "steps": 103211,
+                "file_path": "results\\MedievalAgent\\PetanqueThrower\\PetanqueThrower-103211.onnx",
+                "reward": 0.6956690292805433,
+                "creation_time": 1748350091.15032,
+                "auxillary_file_paths": [
+                    "results\\MedievalAgent\\PetanqueThrower\\PetanqueThrower-103211.pt"
+                ]
+            },
+            {
+                "steps": 153347,
+                "file_path": "results\\MedievalAgent\\PetanqueThrower\\PetanqueThrower-153347.onnx",
+                "reward": 0.8283499889903598,
+                "creation_time": 1748352237.0271275,
+                "auxillary_file_paths": [
+                    "results\\MedievalAgent\\PetanqueThrower\\PetanqueThrower-153347.pt"
+                ]
+            },
+            {
+                "steps": 361293,
+                "file_path": "results\\MedievalAgent\\PetanqueThrower\\PetanqueThrower-361293.onnx",
+                "reward": 0.58640530680408,
+                "creation_time": 1748360368.1416817,
+                "auxillary_file_paths": [
+                    "results\\MedievalAgent\\PetanqueThrower\\PetanqueThrower-361293.pt"
+                ]
+            },
+            {
+                "steps": 499993,
+                "file_path": "results\\MedievalAgent\\PetanqueThrower\\PetanqueThrower-499993.onnx",
+                "reward": 0.9121701965729395,
+                "creation_time": 1748364670.7521734,
+                "auxillary_file_paths": [
+                    "results\\MedievalAgent\\PetanqueThrower\\PetanqueThrower-499993.pt"
+                ]
+            },
+            {
+                "steps": 589857,
+                "file_path": "results\\MedievalAgent\\PetanqueThrower\\PetanqueThrower-589857.onnx",
+                "reward": 0.5763349466359438,
+                "creation_time": 1748365838.4491959,
+                "auxillary_file_paths": [
+                    "results\\MedievalAgent\\PetanqueThrower\\PetanqueThrower-589857.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 589857,
+            "file_path": "results\\MedievalAgent\\PetanqueThrower.onnx",
+            "reward": 0.5763349466359438,
+            "creation_time": 1748365838.4491959,
+            "auxillary_file_paths": [
+                "results\\MedievalAgent\\PetanqueThrower\\PetanqueThrower-589857.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
