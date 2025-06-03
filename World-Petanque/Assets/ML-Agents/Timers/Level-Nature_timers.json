@@ -1,1 +1,41 @@
-{"count":1,"self":46.51224,"total":46.8589361,"children":{"InitializeActuators":{"count":1,"self":0.0015189,"total":0.0015189,"children":null},"InitializeSensors":{"count":1,"self":0.0016385,"total":0.0016385,"children":null},"AgentSendState":{"count":1985,"self":0.0091422,"total":0.0264697,"children":{"CollectObservations":{"count":397,"self":0.0031092,"total":0.0031092,"children":null},"WriteActionMask":{"count":397,"self":0.0025486,"total":0.0025486,"children":null},"RequestDecision":{"count":397,"self":0.0116697,"total":0.0116697,"children":null}}},"DecideAction":{"count":1985,"self":0.3007146,"total":0.3007146,"children":null},"AgentAct":{"count":1985,"self":0.0153377,"total":0.0153377,"children":null}},"gauges":{"PetanqueThrower.CumulativeReward":{"count":23,"max":1.65383244,"min":0.2805032,"runningAverage":0.5529819,"value":1.15449727,"weightedAverage":0.6298338}},"metadata":{"timer_format_version":"0.1.0","start_time_seconds":"1748350110","unity_version":"6000.0.36f1","command_line_arguments":"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.36f1\\Editor\\Unity.exe -projectpath C:\\Users\\milan\\Desktop\\AP-School\\Bachelor\\Lessen\\Minor\\VR\\Examen-Opdracht\\project-vr-experience-MilanMareels\\World-Petanque -useHub -hubIPC -cloudEnvironment production","communication_protocol_version":"1.5.0","com.unity.ml-agents_version":"3.0.0","scene_name":"Level-Nature","end_time_seconds":"1748350157"}}
+{
+  "count": 1,
+  "self": 85.190585599999991,
+  "total": 85.397170899999992,
+  "children": {
+    "InitializeActuators": { "count": 3, "self": 0.0010157, "total": 0.0010157, "children": null },
+    "InitializeSensors": { "count": 3, "self": 0.00099629999999999988, "total": 0.00099629999999999988, "children": null },
+    "AgentSendState": {
+      "count": 3940,
+      "self": 0.0113298,
+      "total": 0.014421999999999999,
+      "children": {
+        "CollectObservations": { "count": 201, "self": 0.000998, "total": 0.000998, "children": null },
+        "WriteActionMask": { "count": 201, "self": 0.001511, "total": 0.001511, "children": null },
+        "RequestDecision": { "count": 201, "self": 0.0005832, "total": 0.0005832, "children": null }
+      }
+    },
+    "DecideAction": { "count": 3940, "self": 0.1765928, "total": 0.1765928, "children": null },
+    "AgentAct": { "count": 3940, "self": 0.013043899999999999, "total": 0.013043899999999999, "children": null }
+  },
+  "gauges": {
+    "PetanqueThrower.CumulativeReward": {
+      "count": 13,
+      "max": 1.540487,
+      "min": 0.256324351,
+      "runningAverage": 0.5163241,
+      "value": 0.8170011,
+      "weightedAverage": 0.583665
+    }
+  },
+  "metadata": {
+    "timer_format_version": "0.1.0",
+    "start_time_seconds": "1748946585",
+    "unity_version": "6000.0.36f1",
+    "command_line_arguments": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.36f1\\Editor\\Unity.exe -projectpath C:\\Users\\milan\\Desktop\\AP-School\\Bachelor\\Lessen\\Minor\\VR\\Examen-Opdracht\\project-vr-experience-MilanMareels\\World-Petanque -useHub -hubIPC -cloudEnvironment production",
+    "communication_protocol_version": "1.5.0",
+    "com.unity.ml-agents_version": "3.0.0",
+    "scene_name": "Level-Nature",
+    "end_time_seconds": "1748946670"
+  }
+}
