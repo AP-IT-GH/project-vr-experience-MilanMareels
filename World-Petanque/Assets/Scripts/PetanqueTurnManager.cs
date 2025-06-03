@@ -10,14 +10,13 @@ public class PetanqueTurnManager : MonoBehaviour
     public Rigidbody agentBallRb;
 
     public Transform playerBallSpawn;
-    public GameObject playerBallPrefab;
+
+    public GameObject currentPlayerBall;
 
     public int maxThrows = 3;
 
     private int playerThrows = 0;
     private int agentThrows = 0;
-
-    private GameObject currentPlayerBall;
 
     private float velocityThreshold = 0.05f;
     private float waitTimeAfterStop = 1f;
@@ -37,6 +36,17 @@ public class PetanqueTurnManager : MonoBehaviour
         }
 
         petanqueAgent.enabled = false;
+
+        // Zorg dat bal event listeners er zijn
+        if (currentPlayerBall != null)
+        {
+            var grabInteractable = currentPlayerBall.GetComponent<XRGrabInteractable>();
+            if (grabInteractable != null)
+            {
+                grabInteractable.selectExited.AddListener(OnPlayerGrabReleased);
+            }
+        }
+
         StartPlayerTurn();
     }
 
@@ -53,13 +63,20 @@ public class PetanqueTurnManager : MonoBehaviour
         isWaitingForBallToStop = false;
 
         if (currentPlayerBall != null)
-            Destroy(currentPlayerBall);
-
-        currentPlayerBall = Instantiate(playerBallPrefab, playerBallSpawn.position, Quaternion.identity);
-        var grabInteractable = currentPlayerBall.GetComponent<XRGrabInteractable>();
-        if (grabInteractable != null)
         {
-            grabInteractable.selectExited.AddListener(OnPlayerGrabReleased);
+            currentPlayerBall.transform.position = playerBallSpawn.position;
+            currentPlayerBall.transform.rotation = Quaternion.identity;
+
+            Rigidbody rb = currentPlayerBall.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+        }
+        else
+        {
+            Debug.LogError("[ERROR] currentPlayerBall is not assigned in the Inspector!");
         }
     }
 
