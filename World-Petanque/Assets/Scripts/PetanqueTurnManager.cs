@@ -140,7 +140,6 @@ public class PetanqueTurnManager : MonoBehaviour
         agentHasThrown = false;
         isWaitingForBallToStop = true;
 
-        // Enable agent and manually request decision once
         petanqueAgent.enabled = true;
 
         var requester = petanqueAgent.GetComponent<DecisionRequester>();
@@ -149,7 +148,6 @@ public class PetanqueTurnManager : MonoBehaviour
 
         petanqueAgent.RequestDecision();
 
-        // Start monitoring for throw and ball stop
         StartCoroutine(MonitorAgentThrowAndStop());
     }
 
@@ -159,7 +157,6 @@ public class PetanqueTurnManager : MonoBehaviour
         agentThrows++;
         isWaitingForBallToStop = false;
 
-        // Now safe to disable agent to prevent further throws
         petanqueAgent.enabled = false;
 
         if (playerThrows < maxThrows)
@@ -197,7 +194,7 @@ public class PetanqueTurnManager : MonoBehaviour
         if (playerThrows >= maxThrows && agentThrows >= maxThrows)
         {
             Debug.Log("[GAME] Game Over. All throws completed.");
-            // Add scoring or end game logic here
+            // HIER KAN EINDSCORE ENZO BEREKENT EN GETOONT WORDEN
         }
     }
 }
