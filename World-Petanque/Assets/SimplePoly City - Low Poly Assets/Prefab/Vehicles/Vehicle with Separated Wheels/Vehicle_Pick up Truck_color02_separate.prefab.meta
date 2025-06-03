@@ -1,7 +1,23 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: b3daa18fa8455a64ca53feb42c417002
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+=======
+guid: b1969db97c2d8604ba4bfe3000a13858
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 58899
+  packageName: SimplePoly City - Low Poly Assets
+  packageVersion: 1.2.3
+  assetPath: Assets/SimplePoly City - Low Poly Assets/Prefab/Vehicles/Vehicle with
+    Separated Wheels/Vehicle_Pick up Truck_color02_separate.prefab
+  uploadId: 171409
+>>>>>>> 46c47029a2b091e4d4a3f006aab7ed5db8c00689
