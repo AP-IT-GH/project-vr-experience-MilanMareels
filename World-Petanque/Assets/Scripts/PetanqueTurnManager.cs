@@ -104,7 +104,7 @@ public class PetanqueTurnManager : MonoBehaviour
 
         while (!agentHasThrown && elapsed < timeout)
         {
-            if (rb.linearVelocity.magnitude > throwDetectThreshold)
+            if (rb.velocity.magnitude > throwDetectThreshold)
             {
                 Debug.Log("[MANAGER] Agent has thrown.");
                 agentHasThrown = true;
@@ -175,11 +175,11 @@ public class PetanqueTurnManager : MonoBehaviour
     {
         while (true)
         {
-            if (rb.linearVelocity.magnitude < velocityThreshold && rb.angularVelocity.magnitude < velocityThreshold)
+            if (rb.velocity.magnitude < velocityThreshold && rb.angularVelocity.magnitude < velocityThreshold)
             {
                 yield return new WaitForSeconds(waitTimeAfterStop);
 
-                if (rb.linearVelocity.magnitude < velocityThreshold && rb.angularVelocity.magnitude < velocityThreshold)
+                if (rb.velocity.magnitude < velocityThreshold && rb.angularVelocity.magnitude < velocityThreshold)
                 {
                     onStop?.Invoke();
                     yield break;
