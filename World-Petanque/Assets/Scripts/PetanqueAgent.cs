@@ -63,28 +63,30 @@ public class PetanqueAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        Debug.Log("Actie ontvangen. allowThrow=" + allowThrow + " | hasThrown=" + hasThrown);
+        
 
-        if (!allowThrow || hasThrown)
+        if (!allowThrow)
         {
             Debug.Log("Agent: actie genegeerd, allowThrow = " + allowThrow);
             return;
         }
 
-        Debug.Log("Agent ontvangt actie en gooit!");
-
-        if (!hasThrown)
+        if (hasThrown)
         {
-            float dirX = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f);
-            float dirY = Mathf.Clamp(actions.ContinuousActions[1], 0.1f, 1f);
-            float dirZ = Mathf.Clamp(actions.ContinuousActions[2], -1f, 1f);
-            float power = Mathf.Clamp(actions.ContinuousActions[3], 0.1f, 1f) * maxThrowPower;
-
-            Vector3 direction = new Vector3(dirX, dirY, dirZ).normalized;
-            ballRb.AddForce(direction * power, ForceMode.VelocityChange);
-
-            hasThrown = true;
+            return;
         }
+
+        Debug.Log("Actie ontvangen. allowThrow=" + allowThrow + " | hasThrown=" + hasThrown);
+        float dirX = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f);
+        float dirY = Mathf.Clamp(actions.ContinuousActions[1], 0.1f, 1f);
+        float dirZ = Mathf.Clamp(actions.ContinuousActions[2], -1f, 1f);
+        float power = Mathf.Clamp(actions.ContinuousActions[3], 0.1f, 1f) * maxThrowPower;
+
+        Vector3 direction = new Vector3(dirX, dirY, dirZ).normalized;
+        ballRb.AddForce(direction * power, ForceMode.VelocityChange);
+
+        hasThrown = true;
+        
 
         // End episode als bal van terrein valt
         if (ballRb.position.y < groundLevel - 0.5f)
