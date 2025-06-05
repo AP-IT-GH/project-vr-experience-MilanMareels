@@ -30,7 +30,7 @@ public class Scoreboard : MonoBehaviour
 
     void UpdateUI()
     {
-        playerScoreText.text = "Speler: " + playerScore;
-        agentScoreText.text = "Agent: " + agentScore;
+        playerScoreText.text = "" + playerScore;
+        agentScoreText.text = "" + agentScore;
     }
 }

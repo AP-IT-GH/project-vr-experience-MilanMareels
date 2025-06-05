@@ -5,8 +5,9 @@ public class TurnManager : MonoBehaviour
     public GameObject playerBall;
     public GameObject agentBall;
     public GameObject agent;
-    public Transform playerBallStart;
-    public Transform agentBallStart;
+    public Transform playerBallReset;
+    public Transform agentBallReset;
+    public Transform agentBallThrowStart;
 
     private enum GameState { PlayerTurn, AgentTurn, Waiting }
     private GameState currentState = GameState.PlayerTurn;
@@ -55,7 +56,7 @@ public class TurnManager : MonoBehaviour
                 if (hasAgentThrown && agentBall.GetComponent<Rigidbody>().linearVelocity.magnitude < 0.05f)
                 {
                     currentState = GameState.Waiting;
-                    Invoke(nameof(CalculateScore), 1f);
+                    Invoke(nameof(CalculateScore), 5f);
                 }
                 break;
         }
@@ -65,13 +66,19 @@ public class TurnManager : MonoBehaviour
     void StartAgentThrow()
     {
         Debug.Log("Agent beurt start");
+
+        agentBall.transform.position = agentBallThrowStart.position;
+        agentBall.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+        agentBall.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
         PetanqueAgent petanqueAgent = agent.GetComponent<PetanqueAgent>();
         petanqueAgent.EndEpisode();
-        Invoke(nameof(EnableAgentThrow), 0.1f);
+        Invoke(nameof(EnableAgentThrow), 1f);
     }
 
     void EnableAgentThrow()
     {
+        Debug.Log("Agent mag nu gooien");
         PetanqueAgent petanqueAgent = agent.GetComponent<PetanqueAgent>();
         petanqueAgent.BeginAgentThrow();
         hasAgentThrown = true;
@@ -94,16 +101,19 @@ public class TurnManager : MonoBehaviour
     void ResetRound()
     {
         // Reset ballen
-        playerBall.transform.position = playerBallStart.position;
+        playerBall.transform.position = playerBallReset.position;
         playerBall.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
         playerBall.GetComponent<PlayerBall>().wasThrown = false;
         playerBall.GetComponent<PlayerBall>().ResetBall();
 
-        agentBall.transform.position = agentBallStart.position;
+        agentBall.transform.position = agentBallReset.position;
         agentBall.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+
+        playerBallStillTime = 0f;
 
         currentState = GameState.PlayerTurn;
         playerBallStopped = false;
         agentBallStopped = false;
+        hasAgentThrown = false;
     }
 }

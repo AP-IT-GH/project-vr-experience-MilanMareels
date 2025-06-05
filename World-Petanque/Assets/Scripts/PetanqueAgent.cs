@@ -31,7 +31,10 @@ public class PetanqueAgent : Agent
     public override void OnEpisodeBegin()
     {
         Debug.Log("Agent: OnEpisodeBegin");
+        Debug.Log("Episode begint. Pos bal: " + ballRb.position + ", Target: " + target.position);
+
         hasThrown = false;
+        allowThrow = false;
         // Reset bal
         ballRb.transform.position = ballStartPos.position;
         ballRb.linearVelocity = Vector3.zero;
@@ -60,6 +63,8 @@ public class PetanqueAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
+        Debug.Log("Actie ontvangen. allowThrow=" + allowThrow + " | hasThrown=" + hasThrown);
+
         if (!allowThrow || hasThrown)
         {
             Debug.Log("Agent: actie genegeerd, allowThrow = " + allowThrow);
