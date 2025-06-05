@@ -1,3 +1,5 @@
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TurnManager : MonoBehaviour
@@ -20,6 +22,14 @@ public class TurnManager : MonoBehaviour
     private float playerBallStillTime = 0f;
     private float waitToCheckStill = 0.2f;
     private bool hasAgentThrown = false;
+
+    public int playerScore = 0;
+    public int agentScore = 0;
+    public int maxScore = 3;
+
+    public GameObject fireworksPrefab;
+    public TextMeshProUGUI winText;
+    public GameObject winCanvas;
 
 
     void Update()
@@ -56,7 +66,7 @@ public class TurnManager : MonoBehaviour
                 if (hasAgentThrown && agentBall.GetComponent<Rigidbody>().linearVelocity.magnitude < 0.05f)
                 {
                     currentState = GameState.Waiting;
-                    Invoke(nameof(CalculateScore), 5f);
+                    Invoke(nameof(CalculateScore), 4f);
                 }
                 break;
         }
@@ -91,11 +101,47 @@ public class TurnManager : MonoBehaviour
         float distAgent = Vector3.Distance(agentBall.transform.position, agent.GetComponent<PetanqueAgent>().target.position);
 
         if (distPlayer < distAgent)
+        {
             Scoreboard.Instance.AddPointToPlayer();
+            AddPointToPlayer();
+        }
         else
+        {
             Scoreboard.Instance.AddPointToAgent();
+            AddPointToAgent();
+        }
 
-        ResetRound();
+        if (playerScore < maxScore && agentScore < maxScore)
+        {
+            ResetRound();
+        }
+    }
+
+    public void AddPointToPlayer()
+    {
+        playerScore++;
+        if (playerScore >= maxScore)
+            EndGame("Player wint!");
+    }
+
+    public void AddPointToAgent()
+    {
+        agentScore++;
+        if (agentScore >= maxScore)
+            EndGame("Agent wint!");
+    }
+
+    void EndGame(string winnerText)
+    {
+        Debug.Log("Einde spel: " + winnerText);
+
+        if (fireworksPrefab != null)
+        {
+            fireworksPrefab.SetActive(true);
+        }
+
+        if (winCanvas != null) winCanvas.SetActive(true);
+        if (winText != null) winText.text = winnerText;
     }
 
     void ResetRound()
