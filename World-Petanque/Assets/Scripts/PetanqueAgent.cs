@@ -18,14 +18,20 @@ public class PetanqueAgent : Agent
     private bool hasThrown = false;
     private Vector3 initialTargetPosition;
 
+    public bool allowThrow = false;
+
+
     public override void Initialize()
     {
         initialTargetPosition = target.position;
         ballRb.maxAngularVelocity = 20f;
     }
 
+
     public override void OnEpisodeBegin()
     {
+        Debug.Log("Agent: OnEpisodeBegin");
+        hasThrown = false;
         // Reset bal
         ballRb.transform.position = ballStartPos.position;
         ballRb.linearVelocity = Vector3.zero;
@@ -33,8 +39,11 @@ public class PetanqueAgent : Agent
 
         // Reset target (optioneel randomiseren)
         // target.position = initialTargetPosition + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f));
-
-        hasThrown = false;
+    }
+    public void BeginAgentThrow()
+    {
+        Debug.Log("Agent: BeginAgentThrow -> mag gooien");
+        allowThrow = true;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -51,6 +60,14 @@ public class PetanqueAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
+        if (!allowThrow || hasThrown)
+        {
+            Debug.Log("Agent: actie genegeerd, allowThrow = " + allowThrow);
+            return;
+        }
+
+        Debug.Log("Agent ontvangt actie en gooit!");
+
         if (!hasThrown)
         {
             float dirX = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f);

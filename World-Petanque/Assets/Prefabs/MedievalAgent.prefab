@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2347070798251581006
+--- !u!1 &1155627792506037227
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6399196410050611733}
-  - component: {fileID: 3920105407843247029}
-  - component: {fileID: 6948533362689727869}
-  - component: {fileID: 5144202098367949791}
-  - component: {fileID: 3983219772403050343}
-  - component: {fileID: 3772474898379392041}
+  - component: {fileID: 1614945853320737906}
+  - component: {fileID: 2455470808265986402}
+  - component: {fileID: 2177496265303567680}
+  - component: {fileID: 4550894846035989062}
+  - component: {fileID: 7704826763912411566}
+  - component: {fileID: 5839748926835650416}
   m_Layer: 0
-  m_Name: Agent
+  m_Name: MedievalAgent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6399196410050611733
+--- !u!4 &1614945853320737906
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2347070798251581006}
+  m_GameObject: {fileID: 1155627792506037227}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.71875197, z: -0, w: -0.6952666}
-  m_LocalPosition: {x: -3.07, y: 0.8, z: -0.11}
+  m_LocalRotation: {x: -0, y: 0.0131191425, z: -0, w: -0.99991393}
+  m_LocalPosition: {x: 3.05, y: 0.55, z: 11.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 268.097, z: 0}
---- !u!114 &3920105407843247029
+  m_LocalEulerAnglesHint: {x: 0, y: 358.497, z: 0}
+--- !u!114 &2455470808265986402
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2347070798251581006}
+  m_GameObject: {fileID: 1155627792506037227}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
@@ -58,7 +58,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 6433abb0365fbe04aad4e6f697408f5e, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 8d97c6f5c9b79264c980ca2c980cc581, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: PetanqueThrower
@@ -67,13 +67,13 @@ MonoBehaviour:
   m_UseChildActuators: 1
   m_DeterministicInference: 0
   m_ObservableAttributeHandling: 0
---- !u!54 &6948533362689727869
+--- !u!54 &2177496265303567680
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2347070798251581006}
+  m_GameObject: {fileID: 1155627792506037227}
   serializedVersion: 4
   m_Mass: 50
   m_Drag: 0
@@ -94,13 +94,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &5144202098367949791
+--- !u!65 &4550894846035989062
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2347070798251581006}
+  m_GameObject: {fileID: 1155627792506037227}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -115,13 +115,13 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3983219772403050343
+--- !u!114 &7704826763912411566
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2347070798251581006}
+  m_GameObject: {fileID: 1155627792506037227}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98fe06be3ba8f4c4596467fbc946b8e3, type: 3}
@@ -135,15 +135,15 @@ MonoBehaviour:
   target: {fileID: 0}
   ballStartPos: {fileID: 0}
   groundLevel: 0
-  maxThrowPower: 30
+  maxThrowPower: 20
   maxDistance: 20
---- !u!114 &3772474898379392041
+--- !u!114 &5839748926835650416
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2347070798251581006}
+  m_GameObject: {fileID: 1155627792506037227}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
