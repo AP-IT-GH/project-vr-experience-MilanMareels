@@ -77,14 +77,15 @@ public class TurnManager : MonoBehaviour
     void StartAgentThrow()
     {
         Debug.Log("Agent beurt start");
-
+        Animator animator = agent.GetComponentInChildren<Animator>();
+        animator.SetTrigger("Throw");
         agentBall.transform.position = agentBallThrowStart.position;
         agentBall.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
         agentBall.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
         PetanqueAgent petanqueAgent = agent.GetComponent<PetanqueAgent>();
         petanqueAgent.EndEpisode();
-        Invoke(nameof(EnableAgentThrow), 1f);
+        Invoke(nameof(EnableAgentThrow), 1.8f);
     }
 
     void EnableAgentThrow()
