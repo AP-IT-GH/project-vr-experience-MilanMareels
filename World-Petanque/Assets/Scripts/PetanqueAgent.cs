@@ -67,7 +67,6 @@ public class PetanqueAgent : Agent
 
         if (!allowThrow)
         {
-            Debug.Log("Agent: actie genegeerd, allowThrow = " + allowThrow);
             return;
         }
 
