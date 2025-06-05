@@ -18,14 +18,23 @@ public class PetanqueAgent : Agent
     private bool hasThrown = false;
     private Vector3 initialTargetPosition;
 
+    public bool allowThrow = false;
+
+
     public override void Initialize()
     {
         initialTargetPosition = target.position;
         ballRb.maxAngularVelocity = 20f;
     }
 
+
     public override void OnEpisodeBegin()
     {
+        Debug.Log("Agent: OnEpisodeBegin");
+        Debug.Log("Episode begint. Pos bal: " + ballRb.position + ", Target: " + target.position);
+
+        hasThrown = false;
+        allowThrow = false;
         // Reset bal
         ballRb.transform.position = ballStartPos.position;
         ballRb.linearVelocity = Vector3.zero;
@@ -33,8 +42,11 @@ public class PetanqueAgent : Agent
 
         // Reset target (optioneel randomiseren)
         // target.position = initialTargetPosition + new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f));
-
-        hasThrown = false;
+    }
+    public void BeginAgentThrow()
+    {
+        Debug.Log("Agent: BeginAgentThrow -> mag gooien");
+        allowThrow = true;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -51,18 +63,29 @@ public class PetanqueAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        if (!hasThrown)
+        
+
+        if (!allowThrow)
         {
-            float dirX = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f);
-            float dirY = Mathf.Clamp(actions.ContinuousActions[1], 0.1f, 1f);
-            float dirZ = Mathf.Clamp(actions.ContinuousActions[2], -1f, 1f);
-            float power = Mathf.Clamp(actions.ContinuousActions[3], 0.1f, 1f) * maxThrowPower;
-
-            Vector3 direction = new Vector3(dirX, dirY, dirZ).normalized;
-            ballRb.AddForce(direction * power, ForceMode.VelocityChange);
-
-            hasThrown = true;
+            return;
         }
+
+        if (hasThrown)
+        {
+            return;
+        }
+
+        Debug.Log("Actie ontvangen. allowThrow=" + allowThrow + " | hasThrown=" + hasThrown);
+        float dirX = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f);
+        float dirY = Mathf.Clamp(actions.ContinuousActions[1], 0.1f, 1f);
+        float dirZ = Mathf.Clamp(actions.ContinuousActions[2], -1f, 1f);
+        float power = Mathf.Clamp(actions.ContinuousActions[3], 0.1f, 1f) * maxThrowPower;
+
+        Vector3 direction = new Vector3(dirX, dirY, dirZ).normalized;
+        ballRb.AddForce(direction * power, ForceMode.VelocityChange);
+
+        hasThrown = true;
+        
 
         // End episode als bal van terrein valt
         if (ballRb.position.y < groundLevel - 0.5f)
