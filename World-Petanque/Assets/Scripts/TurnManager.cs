@@ -28,6 +28,7 @@ public class TurnManager : MonoBehaviour
     public int maxScore = 3;
 
     public GameObject fireworksPrefab;
+    public GameObject menuPrefab;
     public TextMeshProUGUI winText;
     public GameObject winCanvas;
 
@@ -135,9 +136,10 @@ public class TurnManager : MonoBehaviour
     {
         Debug.Log("Einde spel: " + winnerText);
 
-        if (fireworksPrefab != null)
+        if (fireworksPrefab != null && menuPrefab != null)
         {
             fireworksPrefab.SetActive(true);
+            menuPrefab.SetActive(true);
         }
 
         if (winCanvas != null) winCanvas.SetActive(true);
