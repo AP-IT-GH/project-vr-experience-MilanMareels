@@ -50,7 +50,7 @@ Na het doorlopen van deze tutorial heb je een werkende VR-petanque-game waarbij 
 
 #### Objecten:
 
-- **Player**: Een VR-personage dat wordt bestuurd door de speler via een VR-headset en handcontrollers.
+- **Player**: Een VR-personage dat wordt bestuurd door de speler via een VR-headset en handcontrollers. Dit is gebeurd via het XR-toolkit.
 - **Agent**: Visueel gameobject met een rigidbody die worpen uitvoert volgens een getrained ML-script.
 - **Boule**: Metalen-lijkende bol met realistische fysica.
 - **Target**: Een kleinere, anderskleurige bol dat stilstaat en dient als doelwit.
