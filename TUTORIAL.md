@@ -30,26 +30,28 @@ Na het doorlopen van deze tutorial heb je een werkende VR-petanque-game waarbij 
 ### Observaties, acties en beloningen
 
 **Observaties**:
--- Relatieve positie van de boule ten opzichte van het target
--- Snelheid van de boule
--- Positie van de boule
-**Acties**:
--- Gooirichting bepalen
--- Werpkracht bepalen
--- Werpen van de boule
-**Beloningen**:
--- De boule valt van het terrein: -1
--- Werpresultaat, afhankelijk van worp (1 = goed, 0 = slecht), afstand van boule met target (1 = dichtbij, -0.5 = ver weg): min. -0.5, max. 2
--- Tijdens de boule beweegt, afhankelijk van de veranderlijke afstand tussen boule en target: min. 0.0, max. 0.0.005
--- Tijdbesteding actieuitvoering: -0.001
-**Objecten**:
--- **Agent**: Visueel gameobject met een rigidbody die worpen uitvoert volgens een getrained ML-script.
--- **Boule**: Metalen-lijkende bol met realistische fysica.
--- **Target**: Een kleinere, anderskleurige bol dat stilstaat en dient als doelwit.
--- **Petanque area**: Een verzameling van themed 3D-gameobjecten die samen een afgebakend terrein vormen.
--- **Scorebord**: Een themed 3D-gameobject die duidelijk de huidige score voor de agent en speler bijhoudt.
-**Setting**:
-Onze game heet 'World Petanque' voor een reden. Het is petanquen in op verschillende niet-typische locaties, in verschillende niet-typische tijden. Dit zorgt voor een nieuwe, unieke ervaring op het standaard petanquen.
+
+- Relatieve positie van de boule ten opzichte van het target
+- Snelheid van de boule
+- Positie van de boule
+  **Acties**:
+- Gooirichting bepalen
+- Werpkracht bepalen
+- Werpen van de boule
+  **Beloningen**:
+- De boule valt van het terrein: -1
+- Werpresultaat, afhankelijk van worp (1 = goed, 0 = slecht), afstand van boule met target (1 = dichtbij, -0.5 = ver weg): min. -0.5, max. 2
+- Tijdens de boule beweegt, afhankelijk van de veranderlijke afstand tussen boule en target: min. 0.0, max. 0.0.005
+- Tijdbesteding actieuitvoering: -0.001
+  **Objecten**:
+- **Player**: Een VR-personage dat wordt bestuurd door de speler via een VR-headset en handcontrollers.
+- **Agent**: Visueel gameobject met een rigidbody die worpen uitvoert volgens een getrained ML-script.
+- **Boule**: Metalen-lijkende bol met realistische fysica.
+- **Target**: Een kleinere, anderskleurige bol dat stilstaat en dient als doelwit.
+- **Petanque area**: Een verzameling van themed 3D-gameobjecten die samen een afgebakend terrein vormen.
+- **Scorebord**: Een themed 3D-gameobject die duidelijk de huidige score voor de agent en speler bijhoudt.
+  **Setting**:
+  Onze game heet 'World Petanque' voor een reden. Het is petanquen in op verschillende niet-typische locaties, in verschillende niet-typische tijden. Dit zorgt voor een nieuwe, unieke ervaring op het standaard petanquen.
 
 Merk op dat de agent, het scorebord én de petanque area allemaal in hetzelfde thema zijn!
 **Afwijkingen**:
